@@ -4,7 +4,7 @@ import json
 import time
 
 # Set up WebDriver
-driver = webdriver.Chrome()  # Replace with `webdriver.Firefox()` if using Firefox
+driver = webdriver.Chrome()
 url = "https://www.theverge.com/search?q=data+scientist"
 
 # Open the webpage
