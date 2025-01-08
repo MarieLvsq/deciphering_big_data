@@ -1,0 +1,29 @@
+image: node:latest
+
+stages:
+  - build
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+build-job:
+  stage: build
+  script:
+    - npm install
+
+  artifacts:
+    paths:
+      - js/
+      - wrapper.js
+
+deploy-prod:
+  image: ruby:latest
+  stage: deploy
+  script:
+    - apt-get update -yqq
+    - apt-get install git -yqq
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
